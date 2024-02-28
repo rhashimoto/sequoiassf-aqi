@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>purpleair widget</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #top {
+      display: inline-block;
+      transform-origin: center;
+    }
+
+    .container {
+      display: inline-block;
+    }
+  </style>
+  <script type="module">
+    const top = document.getElementById('top');
+
+    // Get the PurpleAir widget URL from the query string.
+    const widgetURL = new URLSearchParams(window.location.search).get('url') ??
+      "https://www.purpleair.com/pa.widget.js?key=64WA8O5Y05B7FSN2&module=AQI&conversion=C5&average=10&layer=standard&container=PurpleAirWidget_85551_module_AQI_conversion_C5_average_10_layer_standard";
+
+    const container = document.createElement('div');
+    container.id = new URL(widgetURL).searchParams.get('container');
+    container.classList.add('container');
+    top.appendChild(container);
+
+    const script = document.createElement('script');
+    script.src = widgetURL;
+    top.appendChild(script);
+
+    new ResizeObserver(() => {
+      const scale = Math.min(
+        document.body.clientWidth / top.offsetWidth,
+        document.body.clientHeight / top.offsetHeight
+      );
+      top.style.transform = `scale(${scale})`;
+
+    }).observe(top);
+  </script>
+</head>
+<body>
+  <div id="top"></div>
+</body>
+</html>

@@ -1,4 +1,13 @@
 {
   "name": "sequoias",
-  "packageManager": "yarn@4.1.0"
+  "packageManager": "yarn@4.1.0",
+  "scripts": {
+    "start": "web-dev-server --node-resolve"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "@web/dev-server": "^0.4.3"
+  }
 }
