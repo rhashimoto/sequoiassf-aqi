@@ -24,11 +24,3 @@ setInterval(() => {
     }
   });
 }, INTERVAL);
-
-// Reload the page at local midnight.
-const now = new Date();
-const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-const msUntilMidnight = midnight - now;
-setTimeout(() => {
-  location.reload();
-}, msUntilMidnight);
